@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter clean:*)",
+      "Bash(flutter pub:*)",
+      "Bash(flutter run:*)",
+      "Bash(./android/gradlew:*)",
+      "Bash(mkdir:*)",
+      "Bash(flutter gen-l10n:*)",
+      "Bash(flutter build:*)"
+    ],
+    "deny": []
+  }
+}
