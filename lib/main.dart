@@ -145,7 +145,7 @@ class _CameraScreenState extends State<CameraScreen> with WidgetsBindingObserver
   void _loadBannerAd() {
     _bannerAd = BannerAd(
       // 실제 배포 시 아래 주석을 해제하고 테스트 ID 부분을 주석 처리하세요
-      adUnitId: 'ca-app-pub-6140257895494497/2706309914', // 실제 배너 광고 ID
+      adUnitId: '', // 실제 배너 광고 ID
       
       // 테스트용 배너 광고 ID (개발/테스트 단계에서 사용)
       // adUnitId: Platform.isAndroid
