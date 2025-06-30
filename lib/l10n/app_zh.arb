@@ -1,0 +1,17 @@
+{
+  "@@locale": "zh",
+  "appTitle": "Bug Finder",
+  "cameraNotFound": "找不到摄像头",
+  "cameraPermissionRequired": "需要摄像头权限",
+  "cameraInitializationFailed": "摄像头初始化失败: {error}",
+  "galleryAccessRequired": "需要相册访问权限",
+  "imageSavedToGallery": "图像已保存到相册",
+  "imageSaveFailed": "图像保存失败",
+  "captureError": "拍照错误: {error}",
+  "errorTitle": "错误",
+  "confirmButton": "确定",
+  "helpMessage": "负片滤镜已应用，可使蜱虫、跳蚤等更清晰可见。\n发现可疑区域时请拍摄并保存。",
+  "processingImage": "正在处理图像...",
+  "fallbackImageSaved": "已保存原始图像（滤镜应用失败）",
+  "showHelp": "显示帮助"
+}

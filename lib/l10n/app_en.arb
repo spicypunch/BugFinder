@@ -1,0 +1,71 @@
+{
+  "@@locale": "en",
+  "appTitle": "Bug Finder",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "cameraNotFound": "Camera not found",
+  "@cameraNotFound": {
+    "description": "Error message when camera is not available"
+  },
+  "cameraPermissionRequired": "Camera permission is required",
+  "@cameraPermissionRequired": {
+    "description": "Error message when camera permission is denied"
+  },
+  "cameraInitializationFailed": "Camera initialization failed: {error}",
+  "@cameraInitializationFailed": {
+    "description": "Error message when camera initialization fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "galleryAccessRequired": "Gallery access permission is required",
+  "@galleryAccessRequired": {
+    "description": "Error message when gallery access is denied"
+  },
+  "imageSavedToGallery": "Image saved to gallery",
+  "@imageSavedToGallery": {
+    "description": "Success message when image is saved"
+  },
+  "imageSaveFailed": "Failed to save image",
+  "@imageSaveFailed": {
+    "description": "Error message when image save fails"
+  },
+  "captureError": "Photo capture error: {error}",
+  "@captureError": {
+    "description": "Error message when photo capture fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "description": "The error message"
+      }
+    }
+  },
+  "errorTitle": "Error",
+  "@errorTitle": {
+    "description": "Title for error dialog"
+  },
+  "confirmButton": "OK",
+  "@confirmButton": {
+    "description": "Confirm button text"
+  },
+  "helpMessage": "The negative filter is applied to make ticks, fleas, etc. more visible.\nCapture and save when you find suspicious areas.",
+  "@helpMessage": {
+    "description": "Help message shown to user"
+  },
+  "processingImage": "Processing image...",
+  "@processingImage": {
+    "description": "Message shown when processing captured image"
+  },
+  "fallbackImageSaved": "Original image saved (filter failed)",
+  "@fallbackImageSaved": {
+    "description": "Message when filter fails but original image is saved"
+  },
+  "showHelp": "Show Help",
+  "@showHelp": {
+    "description": "Tooltip for help button"
+  }
+}

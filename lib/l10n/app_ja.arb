@@ -1,0 +1,17 @@
+{
+  "@@locale": "ja",
+  "appTitle": "Bug Finder",
+  "cameraNotFound": "カメラが見つかりません",
+  "cameraPermissionRequired": "カメラの権限が必要です",
+  "cameraInitializationFailed": "カメラの初期化に失敗しました: {error}",
+  "galleryAccessRequired": "ギャラリーへのアクセス権限が必要です",
+  "imageSavedToGallery": "画像がギャラリーに保存されました",
+  "imageSaveFailed": "画像の保存に失敗しました",
+  "captureError": "写真撮影エラー: {error}",
+  "errorTitle": "エラー",
+  "confirmButton": "OK",
+  "helpMessage": "ネガティブフィルターが適用され、ダニやノミなどがより鮮明に見えます。\n疑わしい部分を発見したら撮影して保存してください。",
+  "processingImage": "画像を処理中...",
+  "fallbackImageSaved": "元の画像が保存されました（フィルタ適用失敗）",
+  "showHelp": "ヘルプを表示"
+}

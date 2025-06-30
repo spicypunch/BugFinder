@@ -1,0 +1,17 @@
+{
+  "@@locale": "ko",
+  "appTitle": "Bug Finder",
+  "cameraNotFound": "카메라를 찾을 수 없습니다",
+  "cameraPermissionRequired": "카메라 권한이 필요합니다",
+  "cameraInitializationFailed": "카메라 초기화 실패: {error}",
+  "galleryAccessRequired": "갤러리 접근 권한이 필요합니다",
+  "imageSavedToGallery": "이미지가 갤러리에 저장되었습니다",
+  "imageSaveFailed": "이미지 저장에 실패했습니다",
+  "captureError": "사진 촬영 오류: {error}",
+  "errorTitle": "오류",
+  "confirmButton": "확인",
+  "helpMessage": "네거티브 필터가 적용되어 진드기, 벼룩 등이 더 선명하게 보입니다.\n의심스러운 부분을 발견하면 촬영하여 저장하세요.",
+  "processingImage": "이미지 처리 중...",
+  "fallbackImageSaved": "원본 이미지가 저장되었습니다 (필터 적용 실패)",
+  "showHelp": "도움말 보기"
+}
