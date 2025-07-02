@@ -3,7 +3,7 @@ description: 반려견 진드기, 벼룩 등을 찾기 위한 네거티브 필�
 publish_to: 'none'
 
 # Flutter 앱의 버전 정보
-version: 1.0.0+1
+version: 3.0.0+3
 
 # 지원하는 Flutter 버전
 environment:
