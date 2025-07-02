@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bug_finder.iml" filepath="$PROJECT_DIR$/bug_finder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/bug_finder_android.iml" filepath="$PROJECT_DIR$/android/bug_finder_android.iml" />
     </modules>
   </component>
 </project>
