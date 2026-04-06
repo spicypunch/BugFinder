@@ -55,7 +55,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // AdMob 초기화
-  await MobileAds.instance.initialize();
+  if (Platform.isAndroid) {
+    await MobileAds.instance.initialize();
+  }
 
   try {
     // 사용 가능한 카메라 목록 가져오기
@@ -149,14 +151,12 @@ class _CameraScreenState extends State<CameraScreen>
 
   // 배너 광고 로드 함수
   void _loadBannerAd() {
-    _bannerAd = BannerAd(
-      // 실제 배포 시 아래 주석을 해제하고 테스트 ID 부분을 주석 처리하세요
-      adUnitId: '', // 실제 배너 광고 ID
+    if (!Platform.isAndroid) {
+      return;
+    }
 
-      // 테스트용 배너 광고 ID (개발/테스트 단계에서 사용)
-      // adUnitId: Platform.isAndroid
-      //     ? 'ca-app-pub-3940256099942544/6300978111' // Android 테스트 배너 ID
-      //     : 'ca-app-pub-3940256099942544/2934735716', // iOS 테스트 배너 ID
+    _bannerAd = BannerAd(
+      adUnitId: 'ca-app-pub-6140257895494497/2706309914',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(

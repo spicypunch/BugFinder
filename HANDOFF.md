@@ -24,16 +24,12 @@
 - Brought iOS project files up to date with current Flutter/Xcode project shape and iOS 13 minimum target
 
 ## Android release blockers
-1. Upload keystore is missing on this machine.
-   - `android/key.properties` does not exist.
-   - Current release signing falls back to debug signing in `android/app/build.gradle`.
-   - The locally built release APK is signed with `Android Debug`.
-2. Real AdMob IDs are not configured.
-   - Android App ID in `android/app/src/main/AndroidManifest.xml` is still the Google test ID.
-   - Banner `adUnitId` in `lib/main.dart` is still empty.
-3. Version must be checked against Play Console before upload.
+1. Version must be checked against Play Console before upload.
    - Current app version is `3.0.0+3` in `pubspec.yaml`.
    - If Play already has build number `3` or higher, bump it before uploading.
+2. The ignored local signing file must exist on any release machine.
+   - Local signing now expects `android/key.properties`.
+   - That file is ignored by git and must be recreated on another machine.
 
 ## iOS release blockers
 1. Signing is not fully configured in Xcode.
@@ -41,25 +37,24 @@
    - `DEVELOPMENT_TEAM` is not set in the project build settings.
    - App Store upload requires selecting the correct Apple team and provisioning profile in Xcode.
 2. Real AdMob IDs are not configured.
-   - `GADApplicationIdentifier` in `ios/Runner/Info.plist` is still the Google test ID.
+   - Android AdMob is configured.
+   - iOS `GADApplicationIdentifier` in `ios/Runner/Info.plist` is still the Google test ID.
 3. App Store Connect metadata still needs to be filled from the Apple side.
 
 ## Deployment checklist
 
 ### Android
-1. Recover the original upload keystore from the old Mac, or reset the upload key in Play Console if it is lost.
-2. Create `android/key.properties` with the real keystore values.
-3. Verify the package name matches the existing Play app:
+1. Verify the package name matches the existing Play app:
    - `applicationId = "kr.jm.bug_finder"`
-4. Replace AdMob test IDs with real production IDs, or temporarily remove ads for this release.
-5. Bump `version` in `pubspec.yaml`.
-6. Build:
+2. Confirm `android/key.properties` exists locally with the correct keystore path and passwords.
+3. Bump `version` in `pubspec.yaml`.
+4. Build:
    - `flutter build appbundle --release`
-7. Confirm signing:
+5. Confirm signing:
    - `apksigner verify --print-certs build/app/outputs/flutter-apk/app-release.apk`
    - signer must not be `Android Debug`
-8. Upload the AAB to Play Console.
-9. Complete Play Console release metadata:
+6. Upload the AAB to Play Console.
+7. Complete Play Console release metadata:
    - app description
    - screenshots
    - privacy policy URL
