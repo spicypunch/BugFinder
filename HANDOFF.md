@@ -6,6 +6,9 @@
 - iOS release build succeeded without codesigning: `flutter build ios --release --no-codesign`
 - Widget/unit tests succeeded: `flutter test`
 - Android release APK passed 16 KB alignment verification.
+- Shorebird initialization is done.
+  - `shorebird.yaml` exists with app id `b4ac2834-5a1f-4d4f-a019-830f9288457e`
+  - `pubspec.yaml` includes `shorebird.yaml` in Flutter assets
 
 ## What changed in this branch
 - Added inspection history flow:
@@ -30,6 +33,9 @@
 2. The ignored local signing file must exist on any release machine.
    - Local signing now expects `android/key.properties`.
    - That file is ignored by git and must be recreated on another machine.
+3. Shorebird first release still needs to be created from this machine or another properly configured release machine.
+   - `shorebird init` is already completed in the repo.
+   - The first Shorebird release must be based on a real Android release build that is uploaded to Play.
 
 ## iOS release blockers
 1. Signing is not fully configured in Xcode.
@@ -61,6 +67,16 @@
    - ads declaration
    - Data safety form
 
+### Shorebird for Android
+1. Keep the Flutter release version aligned with the app build used for release.
+   - Local project Flutter version is `3.41.2`
+2. Run the first Shorebird release from a signed release machine:
+   - `shorebird release android --artifact aab --flutter-version 3.41.2`
+3. Upload the resulting Shorebird-backed AAB to Play Console for the matching store release.
+4. Only after that release is live, use Shorebird patches for Dart-only updates:
+   - `shorebird patch android --release-version 3.0.0+3`
+5. If the Play build number changes before the first Shorebird release, update the patch target release version accordingly.
+
 ### iOS
 1. Open `ios/Runner.xcworkspace` in Xcode.
 2. Select the correct Apple team under `Runner > Signing & Capabilities`.
@@ -82,10 +98,13 @@
 /Users/mackim/fvm/default/bin/flutter test
 /Users/mackim/fvm/default/bin/flutter build appbundle --release
 /Users/mackim/fvm/default/bin/flutter build ios --release --no-codesign
+/Users/mackim/.shorebird/bin/shorebird doctor
+/Users/mackim/.shorebird/bin/shorebird init --display-name "Bug Finder"
 ```
 
 ## Notes
 - `flutter analyze` still reports existing `avoid_print` info-level issues in `lib/main.dart`. They do not block release builds.
+- `shorebird doctor` warned that `pubspec.lock` and `ios/Podfile.lock` are not tracked in git. Shorebird can still be initialized, but tracking lockfiles is safer for reproducible releases.
 - Android 16 KB support is already in good shape on this branch. Local verification succeeded with:
 ```bash
 $HOME/Library/Android/sdk/build-tools/36.1.0/zipalign -c -P 16 -v 4 build/app/outputs/flutter-apk/app-release.apk

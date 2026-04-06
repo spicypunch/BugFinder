@@ -65,6 +65,8 @@ flutter:
   
   # 다국어 지원을 위한 generate 설정
   generate: true
+  assets:
+    - shorebird.yaml
 
   # To add assets to your application, add an assets section, like this:
   # assets:
