@@ -67,5 +67,24 @@
   "showHelp": "Show Help",
   "@showHelp": {
     "description": "Tooltip for help button"
-  }
+  },
+  "historyTooltip": "View history",
+  "resultPreviewTitle": "Capture result",
+  "capturedAtLabel": "Captured",
+  "memoLabel": "Memo",
+  "memoHint": "Add a note (optional)",
+  "closeButton": "Close",
+  "saveToHistoryButton": "Save record",
+  "recordSaved": "Record saved",
+  "historySaveFailed": "Failed to save record",
+  "historyTitle": "Inspection History",
+  "historyEmpty": "No saved inspection records yet.",
+  "noMemoText": "No memo",
+  "historyDetailTitle": "Record Detail",
+  "deleteRecordButton": "Delete record",
+  "recordDeleted": "Record deleted",
+  "historyDeleteFailed": "Failed to delete record",
+  "originalLabel": "Original",
+  "filteredLabel": "Filtered",
+  "historyImageUnavailable": "Image not available"
 }

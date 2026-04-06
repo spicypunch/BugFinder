@@ -18,27 +18,29 @@ android {
     ndkVersion = flutter.ndkVersion
 
     // signingConfigs 설정
-    signingConfigs {
+signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            if (keystorePropertiesFile.exists()) {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
         applicationId = "kr.jm.bug_finder"
-        minSdk = 21
+        minSdkVersion = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -47,7 +49,7 @@ android {
     buildTypes {
         release {
             // release 빌드에 위에서 정의한 signingConfig 적용
-            signingConfig signingConfigs.release
+            signingConfig keystorePropertiesFile.exists() ? signingConfigs.release : signingConfigs.debug
 
             // (선택) 코드 난독화·축소 설정
             minifyEnabled true
