@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:camera/camera.dart';
@@ -16,6 +17,10 @@ import 'widgets/capture_result_sheet.dart';
 
 // 앱 전역 카메라 리스트
 List<CameraDescription> cameras = [];
+const String _androidBannerTestAdUnitId =
+    'ca-app-pub-3940256099942544/6300978111';
+const String _androidBannerReleaseAdUnitId =
+    'ca-app-pub-6140257895494497/2706309914';
 
 // 네거티브 필터 적용 함수 (전역 함수)
 Uint8List? applyNegativeFilter(Uint8List imageBytes) {
@@ -156,7 +161,8 @@ class _CameraScreenState extends State<CameraScreen>
     }
 
     _bannerAd = BannerAd(
-      adUnitId: 'ca-app-pub-6140257895494497/2706309914',
+      adUnitId:
+          kReleaseMode ? _androidBannerReleaseAdUnitId : _androidBannerTestAdUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
