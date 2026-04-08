@@ -21,6 +21,9 @@ const String _androidBannerTestAdUnitId =
     'ca-app-pub-3940256099942544/6300978111';
 const String _androidBannerReleaseAdUnitId =
     'ca-app-pub-6140257895494497/2706309914';
+const String _iosBannerTestAdUnitId = 'ca-app-pub-3940256099942544/2934735716';
+const String _iosBannerReleaseAdUnitId =
+    'ca-app-pub-6140257895494497/4453897310';
 
 // 네거티브 필터 적용 함수 (전역 함수)
 Uint8List? applyNegativeFilter(Uint8List imageBytes) {
@@ -60,7 +63,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // AdMob 초기화
-  if (Platform.isAndroid) {
+  if (Platform.isAndroid || Platform.isIOS) {
     await MobileAds.instance.initialize();
   }
 
@@ -156,13 +159,13 @@ class _CameraScreenState extends State<CameraScreen>
 
   // 배너 광고 로드 함수
   void _loadBannerAd() {
-    if (!Platform.isAndroid) {
+    final String? adUnitId = _bannerAdUnitIdForCurrentPlatform();
+    if (adUnitId == null) {
       return;
     }
 
     _bannerAd = BannerAd(
-      adUnitId:
-          kReleaseMode ? _androidBannerReleaseAdUnitId : _androidBannerTestAdUnitId,
+      adUnitId: adUnitId,
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(
@@ -178,6 +181,18 @@ class _CameraScreenState extends State<CameraScreen>
       ),
     );
     _bannerAd?.load();
+  }
+
+  String? _bannerAdUnitIdForCurrentPlatform() {
+    if (Platform.isAndroid) {
+      return kReleaseMode
+          ? _androidBannerReleaseAdUnitId
+          : _androidBannerTestAdUnitId;
+    }
+    if (Platform.isIOS) {
+      return kDebugMode ? _iosBannerTestAdUnitId : _iosBannerReleaseAdUnitId;
+    }
+    return null;
   }
 
   // 카메라 초기화 함수
