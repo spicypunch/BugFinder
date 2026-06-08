@@ -42,6 +42,9 @@ dependencies:
   
   # AdMob 광고
   google_mobile_ads: ^5.1.0
+  firebase_core: ^4.10.0
+  firebase_analytics: ^12.4.2
+  firebase_crashlytics: ^5.2.3
 
 # 개발용 의존성
 dev_dependencies:

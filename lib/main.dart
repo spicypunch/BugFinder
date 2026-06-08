@@ -1,4 +1,9 @@
 import 'dart:io';
+import 'dart:ui';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,9 +11,9 @@ import 'package:camera/camera.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gal/gal.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 import 'models/inspection_record.dart';
 import 'repositories/inspection_history_repository.dart';
@@ -31,11 +36,11 @@ Uint8List? applyNegativeFilter(Uint8List imageBytes) {
     // 이미지 디코딩
     img.Image? originalImage = img.decodeImage(imageBytes);
     if (originalImage == null) {
-      print('이미지 디코딩 실패');
+      debugPrint('이미지 디코딩 실패');
       return null;
     }
 
-    print('이미지 크기: ${originalImage.width}x${originalImage.height}');
+    debugPrint('이미지 크기: ${originalImage.width}x${originalImage.height}');
 
     // 더 효율적인 방법으로 픽셀 처리
     final img.Image negativeImage = img.Image.from(originalImage);
@@ -53,7 +58,7 @@ Uint8List? applyNegativeFilter(Uint8List imageBytes) {
     final List<int> jpegBytes = img.encodeJpg(negativeImage, quality: 85);
     return Uint8List.fromList(jpegBytes);
   } catch (e) {
-    print('네거티브 필터 적용 오류: $e');
+    debugPrint('네거티브 필터 적용 오류: $e');
     return null;
   }
 }
@@ -61,6 +66,17 @@ Uint8List? applyNegativeFilter(Uint8List imageBytes) {
 void main() async {
   // Flutter 바인딩 초기화
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   // AdMob 초기화
   if (Platform.isAndroid || Platform.isIOS) {
@@ -71,7 +87,7 @@ void main() async {
     // 사용 가능한 카메라 목록 가져오기
     cameras = await availableCameras();
   } catch (e) {
-    print('카메라 초기화 오류: $e');
+    debugPrint('카메라 초기화 오류: $e');
   }
 
   runApp(const BugFinderApp());
@@ -100,6 +116,9 @@ class BugFinderApp extends StatelessWidget {
         Locale('ko'), // 한국어
         Locale('zh'), // 중국어
         Locale('ja'), // 일본어
+      ],
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ],
       home: const CameraScreen(),
       debugShowCheckedModeBanner: false,
@@ -179,7 +198,7 @@ class _CameraScreenState extends State<CameraScreen>
           });
         },
         onAdFailedToLoad: (ad, error) {
-          print('배너 광고 로드 실패: $error');
+          debugPrint('배너 광고 로드 실패: $error');
           ad.dispose();
         },
       ),
@@ -294,7 +313,7 @@ class _CameraScreenState extends State<CameraScreen>
         _isFlashOn = !_isFlashOn;
       });
     } catch (e) {
-      print('플래시 토글 오류: $e');
+      debugPrint('플래시 토글 오류: $e');
     }
   }
 
@@ -334,7 +353,7 @@ class _CameraScreenState extends State<CameraScreen>
       try {
         await file.delete();
       } catch (e) {
-        print('임시 파일 삭제 오류: $e');
+        debugPrint('임시 파일 삭제 오류: $e');
       }
     }
   }
@@ -458,7 +477,7 @@ class _CameraScreenState extends State<CameraScreen>
         await _deleteFileIfExists(photoFile.path);
       }
     } catch (e) {
-      print('촬영 오류 상세: $e');
+      debugPrint('촬영 오류 상세: $e');
       if (mounted) {
         _showToast(AppLocalizations.of(context)!.captureError(e.toString()));
       }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420479633042",
+    "project_id": "pettickfinder-2d615",
+    "storage_bucket": "pettickfinder-2d615.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420479633042:android:8d7b15d1ab4d145573484b",
+        "android_client_info": {
+          "package_name": "kr.jm.bug_finder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJT3y8nxkzJXAFVLExrUDxjPYyWZoTta0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
