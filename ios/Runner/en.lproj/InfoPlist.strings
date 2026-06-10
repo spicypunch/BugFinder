@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "Pet Tick Finder";
+"CFBundleName" = "Pet Tick Finder";
+"NSCameraUsageDescription" = "Camera access is needed to inspect your pet for ticks, fleas, and other suspicious spots.";
+"NSPhotoLibraryAddUsageDescription" = "Photo library access is needed to save captured inspection images.";
+"NSPhotoLibraryUsageDescription" = "Photo library access is needed to save captured inspection images.";

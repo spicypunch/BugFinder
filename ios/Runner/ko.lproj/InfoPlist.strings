@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "강아지 진드기 카메라";
+"CFBundleName" = "강아지 진드기 카메라";
+"NSCameraUsageDescription" = "반려견의 진드기, 벼룩 등을 찾기 위해 카메라를 사용합니다.";
+"NSPhotoLibraryAddUsageDescription" = "촬영한 이미지를 갤러리에 저장하기 위해 사진 라이브러리 접근이 필요합니다.";
+"NSPhotoLibraryUsageDescription" = "촬영한 이미지를 갤러리에 저장하기 위해 사진 라이브러리 접근이 필요합니다.";

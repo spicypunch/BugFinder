@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Bug Finder",
+  "appTitle": "Pet Tick Finder",
   "@appTitle": {
     "description": "The title of the application"
   },

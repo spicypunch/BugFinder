@@ -1,6 +1,6 @@
 {
   "@@locale": "ja",
-  "appTitle": "Bug Finder",
+  "appTitle": "Pet Tick Finder",
   "cameraNotFound": "カメラが見つかりません",
   "cameraPermissionRequired": "カメラの権限が必要です",
   "cameraInitializationFailed": "カメラの初期化に失敗しました: {error}",

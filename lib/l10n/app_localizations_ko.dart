@@ -9,7 +9,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appTitle => 'Bug Finder';
+  String get appTitle => '강아지 진드기 카메라';
 
   @override
   String get cameraNotFound => '카메라를 찾을 수 없습니다';

@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "Bug Finder",
+  "appTitle": "Pet Tick Finder",
   "cameraNotFound": "找不到摄像头",
   "cameraPermissionRequired": "需要摄像头权限",
   "cameraInitializationFailed": "摄像头初始化失败: {error}",

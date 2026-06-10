@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "Pet Tick Finder";
+"CFBundleName" = "Pet Tick Finder";
+"NSCameraUsageDescription" = "ペットのダニ、ノミ、その他の気になる部分を確認するためにカメラを使用します。";
+"NSPhotoLibraryAddUsageDescription" = "撮影した検査画像を写真ライブラリに保存するために、写真へのアクセスが必要です。";
+"NSPhotoLibraryUsageDescription" = "撮影した検査画像を写真ライブラリに保存するために、写真へのアクセスが必要です。";

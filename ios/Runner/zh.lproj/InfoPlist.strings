@@ -1,0 +1,5 @@
+"CFBundleDisplayName" = "Pet Tick Finder";
+"CFBundleName" = "Pet Tick Finder";
+"NSCameraUsageDescription" = "需要使用相机来检查宠物身上的蜱虫、跳蚤及其他可疑部位。";
+"NSPhotoLibraryAddUsageDescription" = "需要访问照片图库以保存拍摄的检查图像。";
+"NSPhotoLibraryUsageDescription" = "需要访问照片图库以保存拍摄的检查图像。";

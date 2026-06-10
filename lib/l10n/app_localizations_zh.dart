@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appTitle => 'Bug Finder';
+  String get appTitle => 'Pet Tick Finder';
 
   @override
   String get cameraNotFound => '找不到摄像头';

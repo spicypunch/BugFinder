@@ -105,7 +105,7 @@ abstract class AppLocalizations {
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'Bug Finder'**
+  /// **'Pet Tick Finder'**
   String get appTitle;
 
   /// Error message when camera is not available

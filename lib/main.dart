@@ -83,7 +83,7 @@ class BugFinderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bug Finder',
+      title: 'Pet Tick Finder',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -132,7 +132,11 @@ class _CameraScreenState extends State<CameraScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _initializeCamera();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _initializeCamera();
+      }
+    });
     _loadBannerAd();
   }
 
@@ -146,12 +150,12 @@ class _CameraScreenState extends State<CameraScreen>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (_cameraController == null || !_cameraController!.value.isInitialized) {
+    if (_isProcessingImage) {
       return;
     }
 
     if (state == AppLifecycleState.inactive) {
-      _cameraController?.dispose();
+      _disposeCameraController();
     } else if (state == AppLifecycleState.resumed) {
       _initializeCamera();
     }
@@ -197,6 +201,10 @@ class _CameraScreenState extends State<CameraScreen>
 
   // 카메라 초기화 함수
   Future<void> _initializeCamera() async {
+    if (_isCameraInitialized) {
+      return;
+    }
+
     if (cameras.isEmpty) {
       _showErrorDialog(AppLocalizations.of(context)!.cameraNotFound);
       return;
@@ -213,14 +221,21 @@ class _CameraScreenState extends State<CameraScreen>
     }
 
     // 카메라 컨트롤러 초기화
-    _cameraController = CameraController(
+    final CameraController controller = CameraController(
       cameras[_isRearCameraSelected ? 0 : 1],
       ResolutionPreset.high,
       enableAudio: false,
     );
 
     try {
-      await _cameraController!.initialize();
+      await controller.initialize();
+      if (!mounted) {
+        await controller.dispose();
+        return;
+      }
+
+      await _cameraController?.dispose();
+      _cameraController = controller;
       if (mounted) {
         setState(() {
           _isCameraInitialized = true;
@@ -235,6 +250,19 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
+  Future<void> _disposeCameraController() async {
+    final CameraController? controller = _cameraController;
+    _cameraController = null;
+    if (mounted) {
+      setState(() {
+        _isCameraInitialized = false;
+      });
+    } else {
+      _isCameraInitialized = false;
+    }
+    await controller?.dispose();
+  }
+
   // 카메라 전환 함수
   Future<void> _switchCamera() async {
     if (cameras.length < 2) return;
@@ -243,7 +271,7 @@ class _CameraScreenState extends State<CameraScreen>
       _isCameraInitialized = false;
     });
 
-    await _cameraController?.dispose();
+    await _disposeCameraController();
 
     setState(() {
       _isRearCameraSelected = !_isRearCameraSelected;
@@ -311,6 +339,18 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
+  Future<bool> _ensureGalleryAccess() async {
+    try {
+      if (await Gal.hasAccess()) {
+        return true;
+      }
+      return Gal.requestAccess();
+    } on GalException catch (e) {
+      print('갤러리 권한 확인 오류: $e');
+      return false;
+    }
+  }
+
   // 사진 촬영 함수
   Future<void> _capturePhoto() async {
     if (_cameraController == null ||
@@ -358,6 +398,15 @@ class _CameraScreenState extends State<CameraScreen>
 
       if (!usedFallback) {
         await filteredFile.writeAsBytes(filteredImageBytes);
+      }
+
+      final bool hasGalleryAccess = await _ensureGalleryAccess();
+      if (!mounted) {
+        return;
+      }
+      if (!hasGalleryAccess) {
+        _showToast(AppLocalizations.of(context)!.galleryAccessRequired);
+        return;
       }
 
       try {

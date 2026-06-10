@@ -9,7 +9,7 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get appTitle => 'Bug Finder';
+  String get appTitle => 'Pet Tick Finder';
 
   @override
   String get cameraNotFound => 'カメラが見つかりません';
