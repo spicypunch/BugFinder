@@ -365,7 +365,7 @@ class _CameraScreenState extends State<CameraScreen>
       }
       return Gal.requestAccess();
     } on GalException catch (e) {
-      print('갤러리 권한 확인 오류: $e');
+      debugPrint('갤러리 권한 확인 오류: $e');
       return false;
     }
   }
